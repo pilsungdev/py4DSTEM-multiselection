@@ -2,7 +2,7 @@
 
 import numpy as np
 from scipy.optimize import leastsq
-from py4DSTEM.process.utils import get_CoM
+from process.utils import get_CoM
 
 def get_dq(q,d):
     """

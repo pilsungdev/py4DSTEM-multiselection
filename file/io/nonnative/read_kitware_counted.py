@@ -1,7 +1,7 @@
 # Reads a Kitware electron counted 4D-STEM dataset
 
 from pathlib import Path
-from ...datastructure import DataCube
+from file.datastructure import DataCube
 
 def read_kitware_counted(fp, mem="RAM", binfactor=1, **kwargs):
     """

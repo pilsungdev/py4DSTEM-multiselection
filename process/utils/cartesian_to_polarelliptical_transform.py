@@ -4,7 +4,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import scipy.optimize as sciopt
-from py4DSTEM.process.utils import print_progress_bar
+from process.utils import print_progress_bar
 from scipy.signal import convolve2d
 
 

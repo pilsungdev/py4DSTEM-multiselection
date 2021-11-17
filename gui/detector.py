@@ -1,10 +1,10 @@
-import py4DSTEM.process.utils.constants as cs
+import process.utils.constants as cs
 import pyqtgraph as pg
-from py4DSTEM.gui.dialogs import DetectorShapeWidget
+from gui.dialogs import DetectorShapeWidget
 from .gui_utils import pg_point_roi
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor
-from py4DSTEM.process.imaging import mask as mk
+from process.imaging import mask as mk
 
 
 class DetectorGroup(list):

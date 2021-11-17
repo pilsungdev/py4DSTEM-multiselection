@@ -1,11 +1,11 @@
 import time
-from py4DSTEM.file.datastructure import DataCube
+from file.datastructure import DataCube
 import sigpy as cp
 import torch as th
 import numpy as np
 from .utils import *
-from py4DSTEM.process.utils import *
-from py4DSTEM.process.utils import plot
+from process.utils import *
+from process.utils import plot
 from tqdm import trange
 
 

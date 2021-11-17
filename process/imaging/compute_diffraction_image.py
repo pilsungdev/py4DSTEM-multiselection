@@ -1,4 +1,4 @@
-from py4DSTEM.file.datastructure import datacube
+from file.datastructure import datacube
 from . import mask as mk
 import numpy as np
 

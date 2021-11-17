@@ -1,8 +1,8 @@
 #!/Users/Ben/Code/anaconda2/envs/py3/bin/python
 
 import sys
-import py4DSTEM.process.utils.constants as ct
-import py4DSTEM.file.sqlite.database as database
+import process.utils.constants as ct
+import file.sqlite.database as database
 from PyQt5 import QtCore, QtWidgets, QtGui
 
 
