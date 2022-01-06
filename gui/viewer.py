@@ -32,6 +32,7 @@ from file.datastructure.datacube import DataCube
 from gui.strain import *
 
 import IPython
+import mrcfile
 if IPython.version_info[0] < 4:
     from IPython.qt.console.rich_ipython_widget import RichIPythonWidget as RichJupyterWidget
     from IPython.qt.inprocess import QtInProcessKernelManager
@@ -337,17 +338,30 @@ class DataViewer(QtWidgets.QMainWindow):
             self.control_widget.btn_update_realSpace.setDisabled(True)
 
     def save_current_space(self, diffractionSpace = True):
-        fileFilter = "tiff(*.tiff);; jpg(*.jpg);; png(*.png)"
-        fileName, _ = QtWidgets.QFileDialog.getSaveFileName(None, "name", None, fileFilter)
+        fileFilter = "mrc(*.mrc);; tiff(*.tiff);; jpg(*.jpg);; png(*.png)"
+        file_name, _ = QtWidgets.QFileDialog.getSaveFileName(None, "name", None, fileFilter)
 
-        if fileName == "":
+        if file_name == "":
             return
-
-        if diffractionSpace:
-            img = self.diffraction_space_widget.export(fileName)
+        if os.path.splitext(file_name)[1] == ".mrc":
+            with mrcfile.new(file_name, overwrite=True) as mrc:
+                if len(self.diffraction_space_widget.image.shape) == 3:
+                    QtWidgets.QMessageBox.about(None, "Img", "Mrc doesn't support Color img. Save as gray scale img")
+                    save_img = np.mean(self.diffraction_space_widget.image, axis=2)
+                elif len(self.diffraction_space_widget.image.shape) == 2:
+                    save_img = self.diffraction_space_widget.image.shape
+                else:
+                    raise Exception("Unknown image shape: {}".format(self.diffraction_space_widget.image.shape))
+                if diffractionSpace:
+                    mrc.set_data(save_img)
+                else:
+                    mrc.set_data(save_img)
         else:
-            img = self.real_space_widget.export(fileName)
-        print("Save image to " + fileName)
+            if diffractionSpace:
+                img = self.diffraction_space_widget.export(file_name)
+            else:
+                img = self.real_space_widget.export(file_name)
+        print("Save image to " + file_name)
 
 
     def setup_diffraction_space_widget(self):
