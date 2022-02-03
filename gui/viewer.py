@@ -349,7 +349,7 @@ class DataViewer(QtWidgets.QMainWindow):
                     QtWidgets.QMessageBox.about(None, "Img", "Mrc doesn't support Color img. Save as gray scale img")
                     save_img = np.mean(self.diffraction_space_widget.image, axis=2)
                 elif len(self.diffraction_space_widget.image.shape) == 2:
-                    save_img = self.diffraction_space_widget.image.shape
+                    save_img = self.diffraction_space_widget.image
                 else:
                     raise Exception("Unknown image shape: {}".format(self.diffraction_space_widget.image.shape))
                 if diffractionSpace:
